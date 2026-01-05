@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -r https://github.com/NIGHT13220021/Resume-Builder.git"
+
   },
   "dependencies": {
     "@react-oauth/google": "^0.13.4",

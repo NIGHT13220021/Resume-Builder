@@ -5,10 +5,9 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
 
-  // ✅ REQUIRED FOR GITHUB PAGES
-  base: "/Resume-Builder/",
+  // ✅ REQUIRED FOR VERCEL
+  base: "/",
 
-  // ✅ ONLY FOR LOCAL DEV (npm run dev)
   server: {
     proxy: {
       "/api": {
