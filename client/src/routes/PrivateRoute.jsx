@@ -8,12 +8,23 @@ const PrivateRoute = () => {
 
   useEffect(() => {
     const verifyAuth = async () => {
+      const token = localStorage.getItem("authToken");
+
+      // 🔐 If no token, block immediately
+      if (!token) {
+        setAllowed(false);
+        setChecking(false);
+        return;
+      }
+
       try {
-        // 🔐 ask backend if token is valid
+        // 🔐 Validate token with backend
         await apiRequest("/api/auth/me");
         setAllowed(true);
-      } catch {
+      } catch (err) {
+        console.error("Auth verification failed:", err);
         setAllowed(false);
+        localStorage.clear();
       } finally {
         setChecking(false);
       }
@@ -22,7 +33,10 @@ const PrivateRoute = () => {
     verifyAuth();
   }, []);
 
-  if (checking) return null; // or loader
+  // Optional: loading state
+  if (checking) {
+    return null; // or spinner
+  }
 
   return allowed ? <Outlet /> : <Navigate to="/login" replace />;
 };
