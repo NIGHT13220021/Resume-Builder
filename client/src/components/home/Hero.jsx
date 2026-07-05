@@ -117,7 +117,7 @@ const Hero = () => {
             href="https://my-portfolio-ai3m7gy89-kundan-kumars-projects-3e5eca6b.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white hover:border-1 hover:border-green-500 text-black rounded-full px-9 h-12 flex items-center transition ml-2"
+            className="bg-white  hover:border-green-500 text-black rounded-full px-9 h-12 flex items-center transition ml-2"
           >
             My Portfolio →
           </a>
