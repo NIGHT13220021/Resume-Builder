@@ -30,6 +30,12 @@ const TemplateSelector = ({ selectedTemplate, onChange }) => {
       preview:
         "Ultra-clean design that puts your content front and center",
     },
+    {
+      id: "meridian",
+      name: "Meridian",
+      preview:
+        "Two-column layout with a sidebar and a timeline rail tracing your career path",
+    },
   ];
 
   // ✅ CLOSE ONLY WHEN CLICKING OUTSIDE

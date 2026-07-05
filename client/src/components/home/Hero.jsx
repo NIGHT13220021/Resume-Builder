@@ -13,34 +13,33 @@ const Hero = () => {
         </Link>
 
         <div className="hidden md:flex items-center gap-8 text-slate-800">
-          <a href="#" className="hover:text-green-600 transition">Home</a>
-          <a href="#features" className="hover:text-green-600 transition">Features</a>
-          <a href="#testimonials" className="hover:text-green-600 transition">Testimonials</a>
-          <a href="#contact" className="hover:text-green-600 transition">Contact</a>
+          <a href="#" className="hover:text-green-600 transition">
+            Home
+          </a>
+          <a href="#features" className="hover:text-green-600 transition">
+            Features
+          </a>
+          <a href="#testimonials" className="hover:text-green-600 transition">
+            Testimonials
+          </a>
+          <a href="#contact" className="hover:text-green-600 transition">
+            Contact
+          </a>
         </div>
 
         {/* DESKTOP ACTIONS */}
         <div className="hidden md:flex gap-2">
+          {/* ✅ UPDATED */}
           <Link
-            to="/login?state=register"
+            to="/app"
             className="px-6 py-2 bg-green-500 hover:bg-green-600 transition rounded-full text-white"
           >
             Get started
           </Link>
-
-          <Link
-            to="/login?state=login"
-            className="px-6 py-2 border hover:bg-slate-50 transition rounded-full text-slate-700"
-          >
-            Login
-          </Link>
         </div>
 
         {/* MOBILE MENU BUTTON */}
-        <button
-          onClick={() => setMenuOpen(true)}
-          className="md:hidden text-xl"
-        >
+        <button onClick={() => setMenuOpen(true)} className="md:hidden text-xl">
           ☰
         </button>
       </nav>
@@ -55,8 +54,9 @@ const Hero = () => {
           Home
         </Link>
 
+        {/* ✅ UPDATED */}
         <Link
-          to="/login?state=register"
+          to="/app"
           className="text-white"
           onClick={() => setMenuOpen(false)}
         >
@@ -106,19 +106,24 @@ const Hero = () => {
 
         {/* CTA BUTTONS */}
         <div className="flex items-center gap-4">
+          {/* ✅ UPDATED */}
           <Link
-            to="/login?state=register"
+            to="/app"
             className="bg-green-500 hover:bg-green-600 text-white rounded-full px-9 h-12 flex items-center transition"
           >
             Get started →
           </Link>
-
-          <button className="border border-slate-400 hover:bg-green-50 transition rounded-full px-7 h-12 text-slate-700">
-            Try demo
-          </button>
+          <a
+            href="https://my-portfolio-ai3m7gy89-kundan-kumars-projects-3e5eca6b.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white hover:border-1 hover:border-green-500 text-black rounded-full px-9 h-12 flex items-center transition ml-2"
+          >
+            My Portfolio →
+          </a>
         </div>
 
-        {/* TRUST TEXT (NO ICONS) */}
+        {/* TRUST TEXT */}
         <p className="mt-14 text-sm text-gray-500 max-w-xl">
           Trusted by students, professionals, and career switchers to build
           clean, modern, recruiter-ready resumes.

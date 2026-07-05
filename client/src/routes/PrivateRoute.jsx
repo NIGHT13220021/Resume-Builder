@@ -10,7 +10,6 @@ const PrivateRoute = () => {
     const verifyAuth = async () => {
       const token = localStorage.getItem("authToken");
 
-      // 🔐 If no token, block immediately
       if (!token) {
         setAllowed(false);
         setChecking(false);
@@ -18,7 +17,6 @@ const PrivateRoute = () => {
       }
 
       try {
-        // 🔐 Validate token with backend
         await apiRequest("/api/auth/me");
         setAllowed(true);
       } catch (err) {
@@ -33,10 +31,7 @@ const PrivateRoute = () => {
     verifyAuth();
   }, []);
 
-  // Optional: loading state
-  if (checking) {
-    return null; // or spinner
-  }
+  if (checking) return null;
 
   return allowed ? <Outlet /> : <Navigate to="/login" replace />;
 };

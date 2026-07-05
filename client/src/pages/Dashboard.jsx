@@ -78,7 +78,7 @@ const Dashboard = () => {
 
       {/* ACTION BUTTONS */}
       <div className="flex gap-4">
-        <button
+        {/* <button
           onClick={() => setShowCreateResume(true)}
           className="w-full sm:max-w-36 h-48 flex flex-col items-center justify-center
           rounded-lg gap-2 border hover:border-green-500 hover:shadow-lg"
@@ -94,7 +94,7 @@ const Dashboard = () => {
         >
           <UploadCloudIcon className="size-11 p-2.5 bg-gradient-to-br from-purple-400 to-purple-600 text-white rounded-full" />
           <p>Upload Existing</p>
-        </button>
+        </button> */}
       </div>
 
       <hr className="border-slate-300 my-6 sm:w-[305px]" />

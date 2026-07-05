@@ -40,7 +40,7 @@ const EMPTY_RESUME = {
     profession: "",
     linkedin: "",
     website: "",
-    image: "", // ✅ must be string (URL / base64)
+    image: "",
     remove_background: false,
   },
   professional_summary: "",
@@ -70,7 +70,6 @@ const ResumeBuilder = () => {
     { id: "skills", name: "Skills", icon: Sparkles },
   ];
 
-  /* ================= LOAD RESUME ONCE ================= */
   useEffect(() => {
     if (initializedRef.current || !resumeId) return;
 
@@ -83,7 +82,7 @@ const ResumeBuilder = () => {
       personal_info: {
         ...EMPTY_RESUME.personal_info,
         ...resume.personal_info,
-        image: resume.personal_info?.image || "", // ✅ safe
+        image: resume.personal_info?.image || "",
       },
       experience: resume.experience || [],
       education: resume.education || [],
@@ -95,76 +94,36 @@ const ResumeBuilder = () => {
     initializedRef.current = true;
   }, [resumeId]);
 
-  /* ================= SAVE & NEXT ================= */
   const handleSaveAndNext = () => {
     setActiveSectionIndex((i) => Math.min(i + 1, sections.length - 1));
   };
 
-  /* ================= PUBLIC / PRIVATE ================= */
   const togglePublic = () => {
     setResumeData((p) => ({ ...p, public: !p.public }));
   };
 
-  /* ================= SHARE ================= */
   const handleShare = async () => {
     if (!resumeData.public) return;
-
     const url = `${window.location.origin}/view/${resumeId}`;
-
     if (navigator.share) {
-      await navigator.share({
-        title: resumeData.title || "My Resume",
-        url,
-      });
+      await navigator.share({ title: resumeData.title || "My Resume", url });
     } else {
       await navigator.clipboard.writeText(url);
       alert("Link copied");
     }
   };
 
-  /* ================= DOWNLOAD ================= */
- /* ================= DOWNLOAD ================= */
-const handleDownload = async () => {
+  const handleDownload = () => {
   try {
-    const token = localStorage.getItem("authToken");
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    // 1️⃣ Not logged in → login
-    if (!token || !user) {
-      navigate("/login");
-      return;
-    }
-
-    // 2️⃣ Ask backend if user is subscribed
-    const subscription = await apiRequest("/api/subscription/me");
-
-    // Not subscribed → subscribe page
-    if (!subscription || subscription.status !== "ACTIVE") {
-      navigate("/subscribe");
-      return;
-    }
-
-    // 3️⃣ Subscribed → allow printable download
     window.print();
-
   } catch (err) {
-    console.error("Download error:", err);
-
-    // Explicit subscription error from backend
-    if (err?.error === "SUBSCRIPTION_REQUIRED") {
-      navigate("/subscribe");
-      return;
-    }
-
     alert("Download failed");
   }
 };
 
-
   return (
     <div>
-      {/* HEADER */}
-      <div className="max-w-7xl mx-auto px-4 py-6">
+      <div className="max-w-7xl mx-auto px-4 py-6 no-print">
         <Link
           to="/app"
           className="inline-flex gap-2 items-center text-slate-500 hover:text-slate-700"
@@ -174,15 +133,10 @@ const handleDownload = async () => {
         </Link>
       </div>
 
-      {/* MAIN */}
       <div className="max-w-7xl mx-auto px-4 pb-8">
         <div className="grid lg:grid-cols-12 gap-8">
-
-          {/* LEFT */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 no-print">
             <div className="bg-white border rounded-lg p-6 pt-1">
-
-              {/* TOP BAR */}
               <div className="flex justify-between items-center mb-6 border-b py-3">
                 <div className="flex gap-3">
                   <TemplateSelector
@@ -222,7 +176,6 @@ const handleDownload = async () => {
                 </div>
               </div>
 
-              {/* FORMS */}
               {sections[activeSectionIndex].id === "personal" && (
                 <PersonalInfoForm
                   data={resumeData.personal_info}
@@ -234,7 +187,7 @@ const handleDownload = async () => {
                         ...v,
                         image:
                           v.image instanceof File
-                            ? URL.createObjectURL(v.image) // ✅ FIX IMAGE
+                            ? URL.createObjectURL(v.image)
                             : v.image ?? p.personal_info.image,
                       },
                     }))
@@ -289,10 +242,8 @@ const handleDownload = async () => {
             </div>
           </div>
 
-          {/* RIGHT */}
           <div className="lg:col-span-7">
             <div className="sticky top-4 flex justify-end gap-2 mb-4 no-print">
-
               {resumeData.public && (
                 <button
                   onClick={handleShare}
@@ -325,7 +276,7 @@ const handleDownload = async () => {
             </div>
 
             <ResumePreview
-              key={resumeData.personal_info.image} // ✅ force re-render image
+              key={resumeData.personal_info.image}
               data={resumeData}
               template={resumeData.template}
               accentColor={resumeData.accent_color}
@@ -337,8 +288,14 @@ const handleDownload = async () => {
       <style>
         {`
           @media print {
-            .no-print {
+            .no-print,
+            button,
+            nav {
               display: none !important;
+            }
+
+            body {
+              background: white !important;
             }
           }
         `}

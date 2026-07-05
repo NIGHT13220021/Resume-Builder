@@ -53,6 +53,20 @@ const Preview = () => {
           accentColor={resumeData.accent_color}
         />
       </div>
+
+      <style>
+        {`
+          @media print {
+            a {
+              display: none !important;
+            }
+
+            body {
+              background: white !important;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };
