@@ -18,6 +18,8 @@ const Navbar = () => {
         <Link to="/">
           <img src="/logo.svg" alt="logo" className="h-11 w-auto" />
         </Link>
+        <p> We Don't Save Your Data — please download your resume before leaving this page</p>
+
 
         {/* User Section */}
         <div className="flex items-center gap-4 text-sm">
